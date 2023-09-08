@@ -8,7 +8,7 @@ const db = mysql.createConnection(
     database: "department_db",
   },
   console.log(`Connected to departments_db database.`),
-  console.log("---- manager application ----")
+  console.log("---- Manager Application ----")
 );
 
 function promptUser() {
@@ -143,10 +143,101 @@ function addEmployee() {
     });
 }
 
-function addRole() {}
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter the title of the role:",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "Enter the salary:",
+      },
+      {
+        type: "input",
+        name: "department_id",
+        message: "Enter the department ID for the role:",
+      },
+    ])
+    .then((answers) => {
+      const { title, salary, department_id } = answers;
+      const query =
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)";
+      db.query(query, [title, salary, department_id], (err, results) => {
+        if (err) {
+          console.error("Error adding role:", err);
+        } else {
+          console.log("Role added successfully!");
+        }
+        promptUser();
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      promptUser();
+    });
+}
 
-function addDepartment() {}
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Enter the name of the department:",
+      },
+    ])
+    .then((answers) => {
+      const { name } = answers;
+      const query = "INSERT INTO department (name) VALUES (?)";
+      db.query(query, [name], (err, results) => {
+        if (err) {
+          console.error("Error adding department:", err);
+        } else {
+          console.log("Department added successfully!");
+        }
+        promptUser();
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      promptUser();
+    });
+}
 
-function updateEmployeeRole() {}
+function updateEmployeeRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "employeeId",
+        message: "Enter the ID of the employee you want to update:",
+      },
+      {
+        type: "input",
+        name: "newRoleId",
+        message: "Enter the new role ID for the employee:",
+      },
+    ])
+    .then((answers) => {
+      const { employeeId, newRoleId } = answers;
+      const query = "UPDATE employee SET role_id = ? WHERE id = ?";
+      db.query(query, [newRoleId, employeeId], (err, results) => {
+        if (err) {
+          console.error("Error updating employee role:", err);
+        } else {
+          console.log("Employee role updated successfully!");
+        }
+        promptUser();
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      promptUser();
+    });
+}
 
 promptUser();
