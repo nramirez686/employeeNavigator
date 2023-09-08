@@ -33,8 +33,6 @@ function promptUser() {
     ])
     .then((answers) => {
       const selectedAction = answers.action;
-      handleUserSelection();
-
       if (selectedAction === "View All Employees") {
         viewAllEmployees();
       } else if (selectedAction === "Add Employee") {
@@ -74,6 +72,7 @@ function viewAllEmployees() {
       console.log(`Role ID: ${employee.role_id}`);
       console.log(`Manager ID: ${employee.manager_id}`);
     });
+    promptUser();
   });
 }
 
@@ -90,6 +89,7 @@ function viewAllRoles() {
       console.log(`Salary: ${role.salary}`);
       console.log(`Department: ${role.department_id}`);
     });
+    promptUser();
   });
 }
 
@@ -104,6 +104,7 @@ function viewAllDepartments() {
       console.log(`ID: ${department.id}`);
       console.log(`Name: ${department.name}`);
     });
+    promptUser();
   });
 }
 
@@ -119,6 +120,16 @@ function addEmployee() {
         type: "input",
         name: "last_name",
         message: "Enter the last name of the employee:",
+      },
+      {
+        type: "input",
+        name: "role_id",
+        message: "Enter the role ID for the employee:",
+      },
+      {
+        type: "input",
+        name: "manager_id",
+        message: "Enter the manager ID for the employee (if applicable):",
       },
     ])
     .then((answers) => {
