@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS department_db;
 CREATE DATABASE department_db;
 
+
 USE department_db;
 
 CREATE TABLE department(
@@ -24,7 +25,7 @@ CREATE TABLE employee(
     role_id INT,
     FOREIGN KEY (role_id)
     REFERENCES role(id),
-    manager_id INT NULL,
+    manager_id INT NULL AUTO_INCREMENT,
     FOREIGN KEY (manager_id) 
     REFERENCES employee(id)
 ); 
