@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const db = mysql.createConnection(
   {
     host: "localhost",
@@ -143,58 +143,10 @@ function addEmployee() {
     });
 }
 
-function addRole() {
-  const roleChoices = [
-    "Sales Associate",
-    "Driver",
-    "Manager",
-    "Customer Service Rep",
-    "Cashier",
-  ];
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "title",
-        message: "Enter the title of the role:",
-      },
-      {
-        type: "input",
-        name: "salary",
-        message: "Enter the salary:",
-      },
-      {
-        type: "list",
-        name: "department_id",
-        message: "Select the department:",
-        choices: roleChoices,
-      },
-    ])
-    .then((answers) => {
-      const { title, salary, department_id } = answers;
-      const query =
-        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)";
-      db.query(query, [title, salary, department_id], (err, results) => {
-        if (err) {
-          console.error("Error adding role:", err);
-        } else {
-          console.log("Role added successfully!");
-        }
-        promptUser();
-      });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      promptUser();
-    });
-}
+function addRole() {}
 
-function updateEmployeeRole() {
-  // Implement logic to update an employee's role
-}
-function addDepartment() {
-  // Implement logic to add a department
-}
+function addDepartment() {}
 
-// Call the function to start prompting the user
+function updateEmployeeRole() {}
+
 promptUser();
