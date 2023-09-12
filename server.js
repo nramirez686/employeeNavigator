@@ -130,6 +130,7 @@ function addEmployee() {
         type: "input",
         name: "manager_id",
         message: "Enter the manager ID for the employee (if applicable):",
+        default: null,
       },
     ])
     .then((answers) => {

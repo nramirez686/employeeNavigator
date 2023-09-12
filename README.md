@@ -38,7 +38,7 @@ For questions about this project, please contact:
 
 - Email: undefined
 - GitHub: [@nramirez686](https://github.com/nramirez686)
-- GitHub Repository: [repolink ](https://github.com/nramirez686/employeeNavigator.git)
+- GitHub Repository: https://github.com/nramirez686/employeeNavigator.git
 
 ![Deployed Application](/assets/app1.png)
 ![Deployed Aplication](/assets/app2.png)
